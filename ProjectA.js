@@ -7,7 +7,7 @@
 //
 // merged and modified to became:
 //
-// ProjectA.js for EECS 351-1, 
+// ControlMulti.js for EECS 351-1, 
 //									Northwestern Univ. AndrewZhang
 
 //		--converted from 2D to 4D (x,y,z,w) vertices
@@ -221,144 +221,30 @@ function initVertexBuffer() {
   // Vertex coordinates(x,y,z,w) and color (R,G,B) for a color tetrahedron:
 	//		Apex on +z axis; equilateral triangle base at z=0
 /*	Nodes:
-		cube:
-			-1.0, -1.0, 1.0, 1.0,		1.0,  1.0,	1.0,	// Node 1 (base: lower front left; red)
-			1.0, -1.0, 1.0, 1.0, 		0.0,  0.0,  1.0, 	// Node 2 (base: lower front right; red)
-			1.0,  -1.0, -1.0, 1.0,  	1.0,  0.0,  0.0,	// Node 3 (base: lower back right;  grn)
-			-1.0, -1.0, -1.0, 1.0, 		0.0,  1.0,  0.0, 	// Node 4 (base: lower back left; blue)
-			-1.0, 1.0, 1.0, 1.0,		1.0,  1.0,	1.0,	// Node 5 (base: upper front left; red)
-			1.0, 1.0, 1.0, 1.0, 		0.0,  0.0,  1.0, 	// Node 6 (base: upper front right; red)
-			1.0,  1.0, -1.0, 1.0,  		1.0,  0.0,  0.0,	// Node 7 (base: upper back right;  grn)
-			-1.0, 1.0, -1.0, 1.0, 		0.0,  1.0,  0.0, 	// Node 8 (base: upper back left; blue)
-		
-		rectangular prism:
-			-0.5, -0.5, 1.0, 1.0,		1.0,  1.0,	1.0,	// Node 1 (base: lower front left; red)
-			0.5, -0.5, 1.0, 1.0, 		0.0,  0.0,  1.0, 	// Node 2 (base: lower front right; red)
-			0.5,  -0.5, -1.0, 1.0,  	1.0,  0.0,  0.0,	// Node 3 (base: lower back right;  grn)
-			-0.5, -0.5, -1.0, 1.0, 		0.0,  1.0,  0.0, 	// Node 4 (base: lower back left; blue)
-			-0.5, 0.5, 1.0, 1.0,		1.0,  1.0,	1.0,	// Node 5 (base: upper front left; red)
-			0.5, 0.5, 1.0, 1.0, 		0.0,  0.0,  1.0, 	// Node 6 (base: upper front right; red)
-			0.5, 0.5, -1.0, 1.0,  		1.0,  0.0,  0.0,	// Node 7 (base: upper back right;  grn)
-			-0.5, 0.5, -1.0, 1.0, 		0.0,  1.0,  0.0, 	// Node 8 (base: upper back left; blue)
+		 0.0,	 0.0, sq2, 1.0,			1.0, 	1.0,	1.0,	// Node 0 (apex, +z axis;  white)
+     c30, -0.5, 0.0, 1.0, 		0.0,  0.0,  1.0, 	// Node 1 (base: lower rt; red)
+     0.0,  1.0, 0.0, 1.0,  		1.0,  0.0,  0.0,	// Node 2 (base: +y axis;  grn)
+    -c30, -0.5, 0.0, 1.0, 		0.0,  1.0,  0.0, 	// Node 3 (base:lower lft; blue)
 
-		hat square sheet:
-			-1.0, 0.0, 1.0, 1.0,		1.0,  1.0,	1.0,	// Node 1 (front-left corner; red)
-			1.0, 0.0, 1.0, 1.0, 		0.0,  0.0,  1.0, 	// Node 2 (front-right corner; red)
-			1.0,  0.0, -1.0, 1.0,  		1.0,  0.0,  0.0,	// Node 3 (rear-right corner;  grn)
-			-1.0, 0.0, -1.0, 1.0, 		0.0,  1.0,  0.0, 	// Node 4 (rear-left corner; blue)
 */
-
-		//cube:
-			// Face 0: (bottom-left side)  
-			-1.0, -1.0, 1.0, 1.0,		1.0,  1.0,	1.0,	// Node 1
-			-1.0, -1.0, -1.0, 1.0, 		0.0,  1.0,  0.0, 	// Node 4
-			1.0, -1.0, 1.0, 1.0, 		0.0,  0.0,  1.0,	// Node 2
-			// Face 0: (bottom-right side)
-			1.0, -1.0, 1.0, 1.0, 		0.0,  0.0,  1.0,	// Node 2
-			-1.0, -1.0, -1.0, 1.0, 		0.0,  1.0,  0.0,	// Node 4
-			1.0,  -1.0, -1.0, 1.0,  	1.0,  0.0,  0.0, 	// Node 3
-    		// Face 1: (front-left side)
-			-1.0, -1.0, 1.0, 1.0,		1.0,  1.0,	1.0,	// Node 1
-    		1.0, 1.0, 1.0, 1.0, 		0.0,  0.0,  1.0,  	// Node 6
-			-1.0, 1.0, 1.0, 1.0,		1.0,  1.0,	1.0, 	// Node 5 
-     		// Face 1: (front-right side)  
-			 1.0, 1.0, 1.0, 1.0, 		0.0,  0.0,  1.0,  	// Node 6
-			-1.0, -1.0, 1.0, 1.0,		1.0,  1.0,	1.0,	// Node 1
-			1.0, -1.0, 1.0, 1.0, 		0.0,  0.0,  1.0, 	// Node 2
-			// Face 2: (right-left side)  
-			1.0, 1.0, 1.0, 1.0, 		0.0,  0.0,  1.0, 	// Node 6
-			1.0, -1.0, 1.0, 1.0, 		0.0,  0.0,  1.0,  	// Node 2
-			1.0,  -1.0, -1.0, 1.0,  	1.0,  0.0,  0.0,	// Node 3
-			// Face 2: (right-right side)
-			1.0, 1.0, 1.0, 1.0, 		0.0,  0.0,  1.0, 	// Node 6
-			1.0,  -1.0, -1.0, 1.0,  	1.0,  0.0,  0.0,	// Node 3
-			1.0,  1.0, -1.0, 1.0,  		1.0,  0.0,  0.0,	// Node 7
-    		// Face 3: (left-right side)
-			-1.0, -1.0, 1.0, 1.0,		1.0,  1.0,	1.0,	// Node 1
-    		-1.0, 1.0, 1.0, 1.0,		1.0,  1.0,	1.0,   	// Node 5
-			-1.0, -1.0, -1.0, 1.0, 		0.0,  1.0,  0.0,	// Node 4 
-     		// Face 3: (left-left side)  
-			-1.0, -1.0, -1.0, 1.0, 		0.0,  1.0,  0.0, 	// Node 4
-			-1.0, 1.0, 1.0, 1.0,		1.0,  1.0,	1.0,	// Node 5
-			-1.0, 1.0, -1.0, 1.0, 		0.0,  1.0,  0.0,	// Node 8
-			// Face 4: (top-left side)  
-			1.0, 1.0, 1.0, 1.0, 		0.0,  0.0,  1.0, 	// Node 6
-			-1.0, 1.0, -1.0, 1.0, 		0.0,  1.0,  0.0, 	// Node 8
-			-1.0, 1.0, 1.0, 1.0,		1.0,  1.0,	1.0,	// Node 5
-			// Face 4: (top-right side)
-			-1.0, 1.0, -1.0, 1.0, 		0.0,  1.0,  0.0,	// Node 8
-			1.0, 1.0, 1.0, 1.0, 		0.0,  0.0,  1.0, 	// Node 6
-			1.0,  1.0, -1.0, 1.0,  		1.0,  0.0,  0.0,	// Node 7
-    		// Face 5: (rear-left side)
-			1.0,  -1.0, -1.0, 1.0,  	1.0,  0.0,  0.0,	// Node 3
-    		-1.0, -1.0, -1.0, 1.0, 		0.0,  1.0,  0.0,  	// Node 4
-			-1.0, 1.0, -1.0, 1.0, 		0.0,  1.0,  0.0, 	// Node 8 
-     		// Face 5: (rear-right side)  
-			1.0,  -1.0, -1.0, 1.0,  	1.0,  0.0,  0.0, 	// Node 3
-			-1.0, 1.0, -1.0, 1.0, 		0.0,  1.0,  0.0,	// Node 8
-			1.0,  1.0, -1.0, 1.0,  		1.0,  0.0,  0.0,	// Node 7
-			
-		//rectangular prism:
-			// Face 0: (bottom-left side)  
-			-0.5, -0.5, 1.0, 1.0,		1.0,  1.0,	1.0,	// Node 1
-			-0.5, -0.5, -1.0, 1.0, 		0.0,  1.0,  0.0, 	// Node 4
-			0.5, -0.5, 1.0, 1.0, 		0.0,  0.0,  1.0,	// Node 2
-			// Face 0: (bottom-right side)
-			0.5, -0.5, 1.0, 1.0, 		0.0,  0.0,  1.0,	// Node 2
-			-0.5, -0.5, -1.0, 1.0, 		0.0,  1.0,  0.0,	// Node 4
-			0.5,  -0.5, -1.0, 1.0,  	1.0,  0.0,  0.0,	// Node 3
-    		// Face 1: (front-left side)
-			-0.5, -0.5, 1.0, 1.0,		1.0,  1.0,	1.0,	// Node 1
-    		0.5, 0.5, 1.0, 1.0, 		0.0,  0.0,  1.0,  	// Node 6
-			-0.5, 0.5, 1.0, 1.0,		1.0,  1.0,	1.0, 	// Node 5 
-     		// Face 1: (front-right side)  
-			0.5, 0.5, 1.0, 1.0, 		0.0,  0.0,  1.0, 	// Node 6
-			-0.5, -0.5, 1.0, 1.0,		1.0,  1.0,	1.0,	// Node 1
-			0.5, -0.5, 1.0, 1.0, 		0.0,  0.0,  1.0, 	// Node 2
-			// Face 2: (right-left side)  
-			0.5, 0.5, 1.0, 1.0, 		0.0,  0.0,  1.0,	// Node 6
-			0.5, -0.5, 1.0, 1.0, 		0.0,  0.0,  1.0,  	// Node 2
-			0.5,  -0.5, -1.0, 1.0,  	1.0,  0.0,  0.0,	// Node 3
-			// Face 2: (right-right side)
-			0.5, 0.5, 1.0, 1.0, 		0.0,  0.0,  1.0,	// Node 6
-			0.5,  -0.5, -1.0, 1.0,  	1.0,  0.0,  0.0,	// Node 3
-			0.5, 0.5, -1.0, 1.0,  		1.0,  0.0,  0.0, 	// Node 7
-    		// Face 3: (left-right side)
-			-0.5, -0.5, 1.0, 1.0,		1.0,  1.0,	1.0,	// Node 1
-    		-0.5, 0.5, 1.0, 1.0,		1.0,  1.0,	1.0,   	// Node 5
-			-0.5, -0.5, -1.0, 1.0, 		0.0,  1.0,  0.0,	// Node 4 
-     		// Face 3: (left-left side)  
-			-0.5, -0.5, -1.0, 1.0, 		0.0,  1.0,  0.0, 	// Node 4
-			-0.5, 0.5, 1.0, 1.0,		1.0,  1.0,	1.0,	// Node 5
-			-0.5, 0.5, -1.0, 1.0, 		0.0,  1.0,  0.0, 	// Node 8
-			// Face 4: (top-left side)  
-			0.5, 0.5, 1.0, 1.0, 		0.0,  0.0,  1.0,	// Node 6
-			-0.5, 0.5, -1.0, 1.0, 		0.0,  1.0,  0.0, 	// Node 8
-			-0.5, 0.5, 1.0, 1.0,		1.0,  1.0,	1.0,	// Node 5
-			// Face 4: (top-right side)
-			-0.5, 0.5, -1.0, 1.0, 		0.0,  1.0,  0.0,	// Node 8
-			0.5, 0.5, 1.0, 1.0, 		0.0,  0.0,  1.0,	// Node 6
-			0.5, 0.5, -1.0, 1.0,  		1.0,  0.0,  0.0, 	// Node 7
-    		// Face 5: (rear-left side)
-			0.5,  -0.5, -1.0, 1.0,  	1.0,  0.0,  0.0,	// Node 3
-    		-0.5, -0.5, -1.0, 1.0, 		0.0,  1.0,  0.0,  	// Node 4
-			-0.5, 0.5, -1.0, 1.0, 		0.0,  1.0,  0.0,	// Node 8 
-     		// Face 5: (rear-right side)  
-			0.5,  -0.5, -1.0, 1.0,  	1.0,  0.0,  0.0, 	// Node 3
-			-0.5, 0.5, -1.0, 1.0, 		0.0,  1.0,  0.0,	// Node 8
-			0.5, 0.5, -1.0, 1.0,  		1.0,  0.0,  0.0,	// Node 7
-
-		//square sheet:
 			// Face 0: (left side)  
-			-1.0, 0.0, -1.0, 1.0, 		0.0,  1.0,  0.0,	// Node 4
-			-1.0, 0.0, 1.0, 1.0,		1.0,  1.0,	1.0, 	// Node 1
-			1.0, 0.0, 1.0, 1.0, 		0.0,  0.0,  1.0,	// Node 2
-			// Face 0: (right side)
-			-1.0, 0.0, -1.0, 1.0, 		0.0,  1.0,  0.0,	// Node 4
-			1.0, 0.0, 1.0, 1.0, 		0.0,  0.0,  1.0,	// Node 2
-			1.0,  0.0, -1.0, 1.0,  		1.0,  0.0,  0.0,	// Node 3
+     0.0,	 0.0, sq2, 1.0,			1.0, 	1.0,	1.0,	// Node 0
+     c30, -0.5, 0.0, 1.0, 		0.0,  0.0,  1.0, 	// Node 1
+     0.0,  1.0, 0.0, 1.0,  		1.0,  0.0,  0.0,	// Node 2
+			// Face 1: (right side)
+		 0.0,	 0.0, sq2, 1.0,			1.0, 	1.0,	1.0,	// Node 0
+     0.0,  1.0, 0.0, 1.0,  		1.0,  0.0,  0.0,	// Node 2
+    -c30, -0.5, 0.0, 1.0, 		0.0,  1.0,  0.0, 	// Node 3
+    	// Face 2: (lower side)
+		 0.0,	 0.0, sq2, 1.0,			1.0, 	1.0,	1.0,	// Node 0 
+    -c30, -0.5, 0.0, 1.0, 		0.0,  1.0,  0.0, 	// Node 3
+     c30, -0.5, 0.0, 1.0, 		0.0,  0.0,  1.0, 	// Node 1 
+     	// Face 3: (base side)  
+    -c30, -0.5,  0.0, 1.0, 		0.0,  1.0,  0.0, 	// Node 3
+     0.0,  1.0,  0.0, 1.0,  	1.0,  0.0,  0.0,	// Node 2
+     c30, -0.5,  0.0, 1.0, 		0.0,  0.0,  1.0, 	// Node 1
   ]);
-  g_vertsMax = 78;		// 12 tetrahedron vertices.
+  g_vertsMax = 12;		// 12 tetrahedron vertices.
   								// we can also draw any subset of these we wish,
   								// such as the last 3 vertices.(onscreen at upper right)
 	
@@ -458,7 +344,7 @@ function drawAll() {
   		// Pass our current matrix to the vertex shaders:
   gl.uniformMatrix4fv(g_modelMatLoc, false, g_modelMatrix.elements);
   		// Draw triangles: start at vertex 0 and draw 12 vertices
-  gl.drawArrays(gl.TRIANGLES, 0, 36);
+  gl.drawArrays(gl.TRIANGLES, 0, 12);
 
   // NEXT, create different drawing axes, and...
   g_modelMatrix.setTranslate(0.4, 0.4, 0.0);  // 'set' means DISCARD old matrix,
@@ -535,7 +421,7 @@ function animate() {
 
 function angleSubmit() {
 // Called when user presses 'Submit' button on our webpage
-//		HOW? Look in HTML file (e.g. ProjectA.html) to find
+//		HOW? Look in HTML file (e.g. ControlMulti.html) to find
 //	the HTML 'input' element with id='usrAngle'.  Within that
 //	element you'll find a 'button' element that calls this fcn.
 
@@ -556,7 +442,7 @@ function clearDrag() {
 
 function spinUp() {
 // Called when user presses the 'Spin >>' button on our webpage.
-// ?HOW? Look in the HTML file (e.g. ProjectA.html) to find
+// ?HOW? Look in the HTML file (e.g. ControlMulti.html) to find
 // the HTML 'button' element with onclick='spinUp()'.
   g_angle01Rate += 25; 
 }
